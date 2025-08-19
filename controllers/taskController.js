@@ -152,7 +152,7 @@ const updateTask = async (req, res) => {
             task.assignedTo = req.body.assignedTo;
          }
 
-         const updatedTask = await Task.save();
+         const updatedTask = await task.save(); // changed Task.save to task.save
          res.json({ message: "Task updated successfully", updatedTask});
 
     } catch (error) {
@@ -227,7 +227,7 @@ const updateTaskChecklist = async (req, res) => {
             return res.status(403).json({ message: "Not authorized to update checklist"});
         }
 
-        task.todoChecklist = todoChecklistl  //replacing with updated checklist
+        task.todoChecklist = todoChecklist  //replacing with updated checklist
 
         //aut-update progress based on checklist completion
         const completedCount = task.todoChecklist.filter(
@@ -254,7 +254,7 @@ const updateTaskChecklist = async (req, res) => {
         res.json({ message: "Task Checklist updated", task:updatedTask });
 
     } catch (error) {
-        res.status(500).json({message: "server errpr", error: error.message });
+        res.status(500).json({message: "server error", error: error.message });
     }
 };
 
